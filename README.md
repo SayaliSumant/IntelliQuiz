@@ -3,7 +3,8 @@ A web-based dynamic quiz generator built with HTML, CSS, JavaScript, and Node.js
 
 This project uses the Open Trivia API for non-technical quizzes and quiz.api for technical quizzes to fetch random quiz questions based on user-selected categories.
 
-✨ Features
+Features
+
 Topic-based Quizzes – Generate quizzes on any topic by simply entering the subject name
 
 Static Quizzes – Fun pre-made quizzes for user engagement
@@ -18,11 +19,12 @@ Dynamic Quiz Generation – Auto-generates questions using API integration
 
 Admin Panel – Add, view, or delete quizzes (shortcut: Ctrl + Alt + A)
 
+
+
 Technologies Used
+
 Backend: Node.js
-
 Frontend: HTML, CSS, JavaScript
-
 Database: MySQL
 
 Installation
