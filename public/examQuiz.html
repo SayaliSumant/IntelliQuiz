@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Questions</title>
+    <script src="./js/script.js"></script>
+    <link rel="icon" href="./images/title-logo.png" type="image/png">
+
+    <style>
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Light Gradient Background */
+        body {
+            background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .top-section {
+            background: linear-gradient(to right, #8e9eab, #eef2f3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            max-width: 180px;
+            height: auto;
+            margin-right: 25px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #6c63ff;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 8px 16px;
+            border: 2px solid #6c63ff;
+            border-radius: 5px;
+            background-color: white;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #6c63ff;
+            color: white;
+            box-shadow: 0 0 10px rgba(108, 99, 255, 0.8);
+        }
+
+        /* Timer Styling */
+        #timer {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #ff6b6b;
+            text-shadow: 1px 1px 2px rgba(255, 107, 107, 0.7);
+        }
+
+        #questions-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .question {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        button {
+            background: linear-gradient(to right, #7699b6, #3f4040);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #3f4040, #7699b6);
+            transform: scale(1.05);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-block p {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+
+        
+        #score-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            /* Dark Overlay */
+            display: none;
+            /* Hidden Initially */
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        #score-box {
+            position: relative;
+            background: blanchedalmond;
+            padding: 26px;
+            border-radius: 10px;
+            width: 60%;
+            height: auto;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+
+        /* Smooth Fade-in Effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            /* Moves it to the top */
+            right: 10px;
+            /* Moves it to the right */
+            font-size: 22px;
+            cursor: pointer;
+            color: #555;
+            background: none;
+            border: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .close-btn:hover {
+            color: #ff5722;
+            /* Change color on hover */
+        }
+
+
+        /* 🆕 Restart Button */
+        .restart-btn {
+            background-color: #ff5722;
+            color: white;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .restart-btn:hover {
+            background-color: #e64a19;
+            box-shadow: 0 0 10px #ff5722;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- 🔥 Header Section -->
+    <div class="top-section">
+        <img src="Logo.jpg" alt="logo" class="logo">
+        <div class="nav-buttons">
+            <a href="index.html" class="back-btn">← Back</a>
+        </div>
+    </div>
+
+    <!-- 🔥 Quiz Header -->
+    <header>
+        <h1>Quiz Questions</h1>
+        <div id="selected-exam"></div>
+        <div id="timer">Elapsed Time: <span id="time">0:00</span></div>
+    </header>
+
+    <!-- 🔥 Main Quiz Section -->
+    <main>
+        <div id="questions-container">
+            <p id="question-text">Press "Start Quiz" to begin.</p>
+            <div id="options-container"></div>
+        </div>
+
+        <!-- 🔥 Navigation Buttons -->
+        <div id="navigation" style="text-align: center; margin-top: 20px;">
+            <button id="start-btn">Start Quiz</button>
+
+            <!-- Initially hidden until the quiz starts -->
+            <button id="submit-btn">Submit</button>
+
+            <!-- ✅ Restart button (initially hidden) -->
+            <button id="restart-btn"
+                style="display:none; margin: 20px 0; padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Restart
+                Quiz</button>
+        </div>
+
+        <!-- 🔥 Score Section -->
+        <div id="score-container"
+            style="display: none; font-size: 20px; font-weight: bold; margin-top: 20px; text-align: center;">
+            Your Score: <span id="score-display">0</span> out of <span id="total-questions">0</span>
+        </div>
+    </main>
+
+    <!-- 🔥 Score Popup -->
+    <div id="score-popup">
+        <div id="score-box">
+            <span class="close-btn" onclick="closePopup()">❌</span>
+            <div id="score-text"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("DOM fully loaded");
+
+            const category = getCategoryFromUrl();
+            const difficulty = getSubCategoryFromUrl();
+
+            document.getElementById('start-btn').addEventListener('click', () => startQuiz(category, difficulty));
+
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.style.display = 'none'; // Hide submit button initially
+            submitBtn.addEventListener('click', submitExamQuiz);
+
+
+        });
+
+        let questions = [];
+        let timer;
+        let isTimerRunning = false;
+        const totalTime = 160;
+
+
+        function getCategoryFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('category');
+        }
+
+        function getSubCategoryFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('sub-category');
+        }
+
+        function startQuiz(category, subCategory) {
+            fetchQuestions(category, subCategory);
+        }
+
+        function startTimer() {
+            if (isTimerRunning) return;
+            isTimerRunning = true;
+
+            let timeLeft = totalTime;
+            const timerDisplay = document.getElementById('time');
+
+            timer = setInterval(() => {
+                timerDisplay.innerText = `${timeLeft} sec`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    alert("⏳ Time's up! Submitting your quiz...");
+                    submitExamQuiz();
+                }
+
+                timeLeft--;
+            }, 1000);
+        }
+
+        /*function submitExamQuiz() {
+            clearInterval(timer);
+            let totalQuestions = questions.length;
+            let correctAnswers = 0;
+            let unansweredCount = 0;
+        
+            questions.forEach((question, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+        
+                if (selectedOption) {
+                    const selectedIdentifier = selectedOption.value.trim();
+                    const optionIndex = ['A', 'B', 'C', 'D'].indexOf(selectedIdentifier);
+        
+                    if (optionIndex !== -1) {
+                        const selectedText = question.options[optionIndex].trim();
+                        if (selectedText === question.correct_answer.trim()) {
+                            correctAnswers++;
+                        }
+                    }
+                } else {
+                    unansweredCount++;
+                }
+            });
+        
+            if (unansweredCount > 0) {
+                alert(`⚠️ You have ${unansweredCount} unanswered question(s). Please attempt all questions before submitting.`);
+                return;
+            }
+        
+            document.getElementById('score-display').innerText = correctAnswers;
+            document.getElementById('total-questions').innerText = totalQuestions;
+            document.getElementById('score-container').style.display = 'block';
+            document.getElementById('submit-btn').style.display = 'none';
+        
+            let restartBtn = document.getElementById('restart-btn');
+            if (!restartBtn) {
+                restartBtn = document.createElement('button');
+                restartBtn.id = 'restart-btn';
+                restartBtn.innerText = 'Restart Quiz';
+                restartBtn.style.display = 'inline-block';
+                restartBtn.style.margin = '10px';
+                restartBtn.style.padding = '10px 20px';
+                restartBtn.style.backgroundColor = '#4CAF50';
+                restartBtn.style.color = 'white';
+                restartBtn.style.border = 'none';
+                restartBtn.style.cursor = 'pointer';
+        
+                document.getElementById('quiz-container').appendChild(restartBtn);
+            } else {
+                restartBtn.style.display = 'inline-block';
+            }
+            restartBtn.addEventListener('click', () => location.reload());
+        }*/
+
+        /*function submitExamQuiz() {
+            clearInterval(timer);
+            let totalQuestions = questions.length;
+            let correctAnswers = 0;
+            let unansweredCount = 0;
+        
+            questions.forEach((question, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+        
+                if (selectedOption) {
+                    const selectedIdentifier = selectedOption.value.trim();
+                    const optionIndex = ['A', 'B', 'C', 'D'].indexOf(selectedIdentifier);
+        
+                    if (optionIndex !== -1) {
+                        const selectedText = question.options[optionIndex].trim();
+                        if (selectedText === question.correct_answer.trim()) {
+                            correctAnswers++;
+                        }
+                    }
+                } else {
+                    unansweredCount++;
+                }
+            });
+        
+            if (unansweredCount > 0) {
+                alert(`⚠️ You have ${unansweredCount} unanswered question(s). Please attempt all questions before submitting.`);
+                return;
+            }
+        
+            // ✅ Style and Display Score Card
+            const scoreContainer = document.getElementById('score-container');
+            scoreContainer.innerHTML = `
+                <div class="score-card">
+                    <h2>🎉 Quiz Completed!</h2>
+                    <p><strong>✅ Correct Answers:</strong> ${correctAnswers}</p>
+                    <p><strong>❓ Total Questions:</strong> ${totalQuestions}</p>
+                    <p><strong>📊 Your Score:</strong> ${((correctAnswers / totalQuestions) * 100).toFixed(2)}%</p>
+                </div>
+            `;
+            scoreContainer.style.display = 'block';
+        
+            document.getElementById('submit-btn').style.display = 'none';
+        
+            let restartBtn = document.getElementById('restart-btn');
+            if (!restartBtn) {
+                restartBtn = document.createElement('button');
+                restartBtn.id = 'restart-btn';
+                restartBtn.innerText = 'Restart Quiz';
+                restartBtn.classList.add('restart-btn');
+                document.getElementById('quiz-container').appendChild(restartBtn);
+            } else {
+                restartBtn.style.display = 'inline-block';
+            }
+            restartBtn.addEventListener('click', () => location.reload());
+        }
+        */
+        /* function submitExamQuiz() {
+             clearInterval(timer);
+             let totalQuestions = questions.length;
+             let correctAnswers = 0;
+             let unansweredCount = 0;
+ 
+             questions.forEach((question, index) => {
+                 const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+ 
+                 if (selectedOption) {
+                     const selectedIdentifier = selectedOption.value.trim();
+                     const optionIndex = ['A', 'B', 'C', 'D'].indexOf(selectedIdentifier);
+ 
+                     if (optionIndex !== -1) {
+                         const selectedText = question.options[optionIndex].trim();
+                         if (selectedText === question.correct_answer.trim()) {
+                             correctAnswers++;
+                         }
+                     }
+                 } else {
+                     unansweredCount++;
+                 }
+             });
+ 
+             if (unansweredCount > 0) {
+                 alert(`⚠️ You have ${unansweredCount} unanswered question(s). Please attempt all questions before submitting.`);
+                 return;
+             }
+ 
+             // ✅ Update the Score Popup Content
+             document.getElementById('score-text').innerHTML = `
+         <h2>🎉 Quiz Completed!</h2>
+         <p><strong>✅ Correct Answers:</strong> ${correctAnswers}</p>
+         <p><strong>❓ Total Questions:</strong> ${totalQuestions}</p>
+         <p><strong>📊 Your Score:</strong> ${((correctAnswers / totalQuestions) * 100).toFixed(2)}%</p>
+     `;
+ 
+             // ✅ Show the Popup Modal
+             document.getElementById('score-popup').style.display = 'flex';
+ 
+             document.getElementById('submit-btn').style.display = 'none';
+ 
+             let restartBtn = document.getElementById('restart-btn');
+             if (!restartBtn) {
+                 restartBtn = document.createElement('button');
+                 restartBtn.id = 'restart-btn';
+                 restartBtn.innerText = 'Restart Quiz';
+                 restartBtn.classList.add('restart-btn');
+                 restartBtn.onclick = () => location.reload();
+                 document.getElementById('score-text').appendChild(restartBtn);
+             }
+         }
+ */
+
+        async function submitExamQuiz() {
+            clearInterval(timer);
+            const category = getCategoryFromUrl();
+            const subCategory = getSubCategoryFromUrl();
+            let totalQuestions = questions.length;
+            let correctAnswers = 0;
+            let unansweredCount = 0;
+            let examData = [];
+
+            questions.forEach((question, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+                let userAnswer = null;
+
+                if (selectedOption) {
+                    const selectedIdentifier = selectedOption.value.trim();
+                    const optionIndex = ['A', 'B', 'C', 'D'].indexOf(selectedIdentifier);
+
+                    if (optionIndex !== -1) {
+                        userAnswer = question.options[optionIndex].trim();
+                        if (userAnswer === question.correct_answer.trim()) {
+                            correctAnswers++;
+                        }
+                    }
+                } else {
+                    unansweredCount++;
+                }
+
+                examData.push({
+                    q: question.question,
+                    o: question.options,
+                    c: question.correct_answer,
+                    u: userAnswer
+                });
+            });
+
+            if (unansweredCount > 0) {
+                alert(`⚠️ You have ${unansweredCount} unanswered question(s). Please attempt all questions before submitting.`);
+                return;
+            }
+
+            // ✅ Update the Score Popup Content
+            document.getElementById('score-text').innerHTML = `
+        <h2>🎉 Exam Completed!</h2>
+        <p><strong>✅ Correct Answers:</strong> ${correctAnswers}</p>
+        <p><strong>❓ Total Questions:</strong> ${totalQuestions}</p>
+        <p><strong>📊 Your Score:</strong> ${((correctAnswers / totalQuestions) * 100).toFixed(2)}%</p>
+      `;
+
+            // ✅ Show the Popup Modal
+            document.getElementById('score-popup').style.display = 'flex';
+            document.getElementById('submit-btn').style.display = 'none';
+
+            let restartBtn = document.getElementById('restart-btn');
+            if (!restartBtn) {
+                restartBtn = document.createElement('button');
+                restartBtn.id = 'restart-btn';
+                restartBtn.innerText = 'Restart Quiz';
+                restartBtn.classList.add('restart-btn');
+                restartBtn.onclick = () => location.reload();
+                document.getElementById('score-text').appendChild(restartBtn);
+            }
+
+            // ✅ Send exam progress to the backend
+            try {
+                const response = await fetch('/save-exam-progress', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        category: category,
+                        subCategory: subCategory,
+                        score: correctAnswers,
+                        totalQuestions: totalQuestions,
+                        questions_json: JSON.stringify(examData)
+                    })
+                });
+                console.log(examData)
+                const data = await response.json();
+                alert(data.message);
+            } catch (error) {
+                alert("Error in saving exam progress!");
+                console.log('Error saving exam progress: ', error);
+            }
+        }
+
+
+        function displayAllQuestions() {
+            const questionsContainer = document.getElementById('options-container');
+            questionsContainer.innerHTML = '';
+
+            if (!questions.length) {
+                alert("No questions available.");
+                return;
+            }
+
+            questions.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('question-block');
+
+                questionElement.innerHTML = `
+                <p><strong>${index + 1}. ${question.question}</strong></p>
+                <div>
+                    <input type="radio" name="question${index}" value="A"> A. ${question.options[0]}<br>
+                    <input type="radio" name="question${index}" value="B"> B. ${question.options[1]}<br>
+                    <input type="radio" name="question${index}" value="C"> C. ${question.options[2]}<br>
+                    <input type="radio" name="question${index}" value="D"> D. ${question.options[3]}
+                </div>
+            `;
+
+                questionsContainer.appendChild(questionElement);
+                startTimer();
+
+                // ✅ Show submit button only when the last question is answered
+                const lastQuestionRadios = questionElement.querySelectorAll(`input[name="question${index}"]`);
+                lastQuestionRadios.forEach(radio => {
+                    radio.addEventListener('change', () => {
+                        if (index === questions.length - 1) {
+                            document.getElementById('submit-btn').style.display = 'inline-block';
+                        }
+                    });
+                });
+            });
+        }
+
+
+        async function fetchQuestions(category, subCategory) {
+            try {
+                const url = `/get-questions?category=${encodeURIComponent(category)}&sub_category=${encodeURIComponent(subCategory)}`;
+
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Failed to fetch questions: ${response.status}`);
+
+                const data = await response.json();
+                if (!data.length) {
+                    alert("No questions found for the selected category and difficulty.");
+                    return;
+                }
+
+                questions = data.map(q => ({
+                    id: q.id,
+                    question: q.question,
+                    options: [q.option_a, q.option_b, q.option_c, q.option_d],
+                    correct_answer: q.correct_answer
+                }));
+
+                displayAllQuestions();
+            } catch (error) {
+                console.log("Error fetching questions:", error);
+                alert("Error loading questions. Please try again.");
+            }
+        }
+        function closePopup() {
+            document.getElementById('score-popup').style.display = 'none';
+        }
+
+    </script>
+
+</body>
+
+</html>

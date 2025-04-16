@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IntelliQuiz - Quiz Generator</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="./images/title-logo.png" type="image/png">
+  <script src="./js/script.js"></script>
+</head>
+
+<body>
+
+  <!--Register Form-->
+  <div class="register" id="registerForm">
+    <div class="registerContent">
+      <div class="form-heading">Welcome to IntelliQuiz</div>
+      <span class="register-btn" id="closeForm">&times;</span>
+      <form action="/register" method="post">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+
+        <label for="password2">Confirm Password</label>
+        <input type="password" name="password2" id="password2" required>
+
+        <button id="regBtn" type="submit">Register</button>
+
+        <div class="signin-option">
+          Already have an account? <a id="signin">Sign in</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!--Login Form-->
+  <div class="register" id="loginForm">
+    <div class="registerContent">
+      <div class="form-heading">Login</div>
+      <span class="register-btn" id="closeX">&times;</span>
+      <form action="/login" method="post">
+        <label for="user">Username</label>
+        <input type="text" name="user" id="user" required>
+
+        <label for="password3">Password</label>
+        <input type="password" name="password3" id="password3" required>
+
+
+        <button id="loginBtn" type="submit">LOGIN</button>
+
+        <div class="signin-option">
+          Don't have an account? <a id="register">Sign Up</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!--NAVIGATION BAR-->
+  <nav id="navbar">
+    <img src="./images/logo.jpeg" alt="logo">
+    <h3><a href="#home">Home</a></h3>
+    <h3><a href="#quizzes">Explore</a></h3>
+    <h3 id="examLink"><a href="#exam">Exam Preparation</a></h3>
+    <h3 id="generate"><a href="#gen">Generate Quiz</a></h3>
+    <h3><a href="#about">About Us</a></h3>
+    <div id="mainBtn">
+      <!--button id="logBtn">Login</button-->
+      <button id="registerBtn">Register / Login</button>
+    </div>
+    <div id="user-info">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+        <path
+          d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z" />
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF">
+        <path d="M480-360 280-560h400L480-360Z" />
+      </svg>
+      <div class="dropdown-content" align="left">
+        <p id="userNameDisplay"></p>
+        <a href="#progress-container" id="progress">Your Progress</a>
+        <a href="#" id="logoutButton">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!--MAIN PAGE-->
+  <div id="home" class="main">
+    <br>
+    <div id="intro" align="center">
+      <h1>Welcome to IntelliQuiz – Your Ultimate Quiz Companion!</h1>
+      <h2>Learn. Play. Master – IntelliQuiz Awaits!</h2>
+      <h4>Generate quizzes on any topic, sharpen your skills, and prepare for competitive exams all in one place.</h4>
+    </div>
+    <div class="main2">
+      <div class="features">
+        <div class="cards-container">
+          <div class="card">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#011e3d">
+              <path
+                d="M560-360q17 0 29.5-12.5T602-402q0-17-12.5-29.5T560-444q-17 0-29.5 12.5T518-402q0 17 12.5 29.5T560-360Zm-30-128h60q0-29 6-42.5t28-35.5q30-30 40-48.5t10-43.5q0-45-31.5-73.5T560-760q-41 0-71.5 23T446-676l54 22q9-25 24.5-37.5T560-704q24 0 39 13.5t15 36.5q0 14-8 26.5T578-596q-33 29-40.5 45.5T530-488ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z" />
+            </svg>
+            <div class="internal">
+              <h3>Dynamic Quizzes</h3>
+              <p>Generate quizzes instantly on any topic you choose</p>
+            </div>
+          </div>
+          <div class="card">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#011e3d">
+              <path
+                d="M480-120 200-272v-240L40-600l440-240 440 240v320h-80v-276l-80 44v240L480-120Zm0-332 274-148-274-148-274 148 274 148Zm0 241 200-108v-151L480-360 280-470v151l200 108Zm0-241Zm0 90Zm0 0Z" />
+            </svg>
+            <div class="internal">
+              <h3>Competitive Exam Preparation</h3>
+              <p>UPSC, MPSC, Bank Exams, and more!</p>
+            </div>
+          </div>
+          <div class="card">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#011e3d">
+              <path
+                d="M300-360h60v-160h-60v50h-60v60h60v50Zm100-50h320v-60H400v60Zm200-110h60v-50h60v-60h-60v-50h-60v160Zm-360-50h320v-60H240v60Zm80 450v-80H160q-33 0-56.5-23.5T80-280v-480q0-33 23.5-56.5T160-840h640q33 0 56.5 23.5T880-760v480q0 33-23.5 56.5T800-200H640v80H320ZM160-280h640v-480H160v480Zm0 0v-480 480Z" />
+            </svg>
+            <div class="internal">
+              <h3>Personalized Progress</h3>
+              <p>Track your quiz history and improve your skills.</p>
+            </div>
+          </div>
+          <div class="card">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#011e3d">
+              <path
+                d="m280-620 80-80-80-80-80 80 80 80Zm200-40ZM160-400q-33 0-56.5-23.5T80-480v-360q0-33 23.5-56.5T160-920h640q33 0 56.5 23.5T880-840v360q0 33-23.5 56.5T800-400H671q6-20 8-40t0-40h121v-360H160v360h121q-2 20 0 40t8 40H160Zm500-280q25 0 42.5-17.5T720-740q0-25-17.5-42.5T660-800q-25 0-42.5 17.5T600-740q0 25 17.5 42.5T660-680ZM200-40v-84q0-35 19.5-65t51.5-45q49-23 102-34.5T480-280q54 0 107 11.5T689-234q32 15 51.5 45t19.5 65v84H200Zm80-80h400v-4q0-12-7-22t-18-15q-42-19-86-29t-89-10q-45 0-89 10t-86 29q-11 5-18 15t-7 22v4Zm200-200q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 58-41 99t-99 41Zm0-80q25 0 42.5-17.5T540-460q0-25-17.5-42.5T480-520q-25 0-42.5 17.5T420-460q0 25 17.5 42.5T480-400Zm0-60Zm0 340Z" />
+            </svg>
+            <div class="internal">
+              <h3>Interactive & Engaging</h3>
+              <p>Quizzes designed to challenge and entertain.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Generate Quiz Form-->
+  <div class="register" id="gen">
+    <div class="registerContent">
+        <div class="form-heading">Generate Your Quiz</div>
+        <span class="register-btn" id="closeGForm">&times;</span>
+        <form id="quizForm">
+            <label for="quizType">Select Quiz Type:</label>
+            <select id="quizType" name="quizType">
+                <option value="tech">Tech Quiz</option>
+                <option value="non-tech">Non-Tech Quiz</option>
+            </select><br><br>
+            
+            <label for="topic">Enter Topic:</label>
+            <input type="text" id="topic" name="topic" placeholder="e.g., JavaScript, History" required><br><br>
+
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select><br><br>
+
+            <label for="numQuestions">Number of Questions:</label>
+            <input type="number" id="numQuestions" name="numQuestions" value="20" min="1" max="20"><br><br>
+
+            <button id="genBtn" type="submit">Start Quiz</button>
+        </form>
+    </div>
+  </div>
+
+<!--Save Progress PopUp-->
+  <div class="register" id="popup">
+    <div class="registerContent" align="center">
+      <p class="form-heading">Do you want to login & save your progress?</p>
+      <button style="color: black; border: black solid;" id="yesButton">Yes</button>
+      <button style="color: black; border: black solid;" id="noButton">No</button>
+    </div>
+  </div>
+
+  <!--MAIN QUIZ CARDS-->
+  <div id="quizzes" class="quizCardContainer" style="padding-top: 5.5%;">
+    <div class="quizCard" onclick="displayList('quiz1','close1')">
+      <img src="./images/gk-img.png" alt="General Knowledge" class="quizCardImage" />
+      <div class="quizCardContent">
+        <h4><b>General Knowledge</b></h4>
+        <p>Fun way to test how much you know about the world around you</p>
+      </div>
+    </div>
+
+    <div class="quizCard" onclick="displayList('quiz2', 'close2')">
+      <img src="./images/pop-culture.jpg" alt="Pop Culture" class="quizCardImage" />
+      <div class="quizCardContent">
+        <h4><b>Pop Culture</b></h4>
+        <p>All about the movies, TV shows, music, and trends that shape our world</p>
+      </div>
+    </div>
+
+    <div class="quizCard" onclick="displayList('quiz3','close3')">
+      <img src="./images/sports-img.jpg" alt="Sports & Fitness" class="quizCardImage" />
+      <div class="quizCardContent">
+        <h4><b>Sports & Fitness</b></h4>
+        <p>Dive into the world of sports and stay sharp with exciting questions!</p>
+      </div>
+    </div>
+
+    <div class="quizCard" onclick="displayList('quiz4','close4')">
+      <img src="./images/education-img.jpg" alt="Education & Learning" class="quizCardImage" />
+      <div class="quizCardContent">
+        <h4><b>Education & Learning</b></h4>
+        <p>Test your knowledge on subjects like computer, math, history, and more.</p>
+      </div>
+    </div>
+
+    <div class="quizCard" onclick="displayList('quiz5','close5')">
+      <img src="./images/fun-img.jpg" alt="Fun & Games" class="quizCardImage" />
+      <div class="quizCardContent">
+        <h4><b>Fun & Games</b></h4>
+        <p>All about testing your knowledge on exciting activities, puzzles, and games.</p>
+      </div>
+    </div>
+
+    <div class="quizCard" onclick="displayList('quiz6','close6')">
+      <img src="./images/holiday-img.jpg" alt="Seasonal & Holiday" class="quizCardImage" />
+      <div class="quizCardContent">
+        <h4><b>Seasonal & Holiday</b></h4>
+        <p>Test your knowledge of celebrations, festivals, and traditions throughout the year.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!--QUIZ MENUS-->
+  <div class="quiz" id="quiz1">
+    <span class="register-btn" id="close1">&times;</span>
+    <h2 class="quiz-item" data-category="history">History's Mystery</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="science">Science & Technology</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="geography">World Geography</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="quotes">Famous Quotes & Authors</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="music">Music Through the Ages</h2>
+    <hr>
+  </div>
+  <div class="quiz" id="quiz2">
+    <span class="register-btn" id="close2">&times;</span>
+    <h2 class="quiz-item" data-category="movie">Movies & TV Shows</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="celebTrivia">Celebrity Trivia</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="musicArtist">Music Genres & Artists</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="videoGames">Video Games</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="booksAuthors">Books & Authors</h2>
+    <hr>
+  </div>
+  <div class="quiz" id="quiz3">
+    <span class="register-btn" id="close3">&times;</span>
+    <h2 class="quiz-item" data-category="Football">Football Frenzy</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Basketball">Basketball Basics</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Cricket">Cricket Craze</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Fitness">Fitness & Wellness</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Olympic">Olympic History</h2>
+    <hr>
+  </div>
+  <div class="quiz" id="quiz4">
+    <span class="register-btn" id="close4">&times;</span>
+    <h2 class="quiz-item" data-category="Maths">Math & Logic</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="GeneralScience">Science & Chemistry</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="LanguageLiterature">Language & Literature</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="HistoryCulture">History & Culture</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Computer">Computer Programming</h2>
+    <hr>
+  </div>
+  <div class="quiz" id="quiz5">
+    <span class="register-btn" id="close5">&times;</span>
+    <h2 class="quiz-item" data-category="RetroArcadeGames">Retro Arcade Games</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="BoardPuzzles">Board Games & Puzzles</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="FunFacts">Funny Facts & Jokes</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="FoodDrink">Food & Drink Trivia</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Travel">Travel & Adventure</h2>
+    <hr>
+  </div>
+  <div class="quiz" id="quiz6">
+    <span class="register-btn" id="close6">&times;</span>
+    <h2 class="quiz-item" data-category="Christmas">Christmas Carol Quiz</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Halloween">Halloween Horror Trivia</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Valentine">Valentine's Day Love Quiz</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="Easter">Easter Egg Hunt Trivia</h2>
+    <hr>
+    <h2 class="quiz-item" data-category="NewYear">New Year's Resolutions Quiz</h2>
+    <hr>
+  </div>
+
+
+
+  
+
+  <!--EXAM PREPARATION-->
+  <!--Heading-->
+  <div id="exam" style="display: none;">
+    <div class="quiz-header"><br><br><br>
+      <h2>A DOORWAY TO SUCCESS</h2>
+      <div class="quiz-header-subtext">
+        <span>Perform</span>
+        <span>|</span>
+        <span>Analyse</span>
+        <span>|</span>
+        <span>Improve</span>
+      </div>
+    </div>
+    <!--Content Cards-->
+    <div class="content">
+      <div class="section-title">Popular Courses</div>
+      <div class="courses-grid">
+        <div class="course-card" data-category="MAH PG CET">
+          <img src="https://notopedia-uploads.s3.us-east-2.amazonaws.com/bulletin_board/202403131124034436.jpg"
+            alt="CBSE Class VI">
+          <h3>MAH PG CET</h3>
+        </div>
+        <div class="course-card" data-category="NEET">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZeXP8JhumDX-VveZj_XFo-IouFNbAnQMzbw&s"
+            alt="NEET UG">
+          <h3>NEET UG</h3>
+        </div>
+        <div class="course-card" data-category="MAH-CET-UG">
+          <img src="https://notopedia-uploads.s3.us-east-2.amazonaws.com/bulletin_board/202403131124034436.jpg"
+            alt="SSC CGL">
+          <h3>MAH-CET UG</h3>
+        </div>
+        <div class="course-card" data-category="CTET">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKXZQ7zv2dxtKDq2unUm50lRFUauR36F8dmQ&s"
+            alt="CTET Paper - I">
+          <h3>CTET Paper - I</h3>
+        </div>
+        <div class="course-card" data-category="JEE Advanced">
+          <img src="https://www.guidemecareer.com/backend/subcategory%20exam/JEE-Advanced.png" alt="CUET UG Hindi">
+          <h3>JEE Advanced</h3>
+        </div>
+        <div class="course-card" data-category="JEE Mains">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO7YxpUC683iNtsAzlIdQ8mpxFeEXB0lPe4g&s"
+            alt="JEE Mains">
+          <h3>JEE Main</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Levels PopUp -->
+  <div class="overlay" id="overlay"></div>
+  <div class="popup" id="exam-menu-popup">
+    <h2 id="popupTitle"></h2>
+    <p>Select your difficulty level for this course</p>
+    <ul class="level-btn" id="advanceBtn">
+      <li>Easy</li>
+      <li>Medium</li>
+      <li>Hard</li>
+    </ul>
+    <button id="close-exam-popup">Close</button>
+  </div>
+
+
+
+
+
+  <!--USER PROGRESS DASHBOARD-->
+  <!--1. USER TABLE-->
+  <div id="progress-container" style="display: none;">
+    <h2>Your Quiz Progress</h2>
+    <table id="progress-table" border="1">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Score</th>
+          <th>Submission Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Quiz progress data will be inserted here -->
+      </tbody>
+    </table>
+  </div>
+
+  <!--2. Quiz Details Modal -->
+  <div id="quiz-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-quiz-modal" class="quiz-close-btn">&times;</span>
+      <h2 class="quiz-heading" align="center">Quiz Details</h2>
+      <div id="quiz-details"></div>
+    </div>
+  </div>
+
+
+  <!--ABOUT US-->
+  <div class="about" id="about" style="padding-top: 7%;">
+    <div class="aboutcontainer1">
+      <header>ABOUT US</header>
+      <p>"Welcome to IntelliQuiz, your ultimate destination for dynamic quiz generation and exam preparation! We are
+        passionate about helping students, professionals, and lifelong learners achieve their goals through innovative
+        and personalized learning experiences."</p>
+    </div>
+    <div class="aboutcontainer2">
+      <div class="content-box">
+        <div class="contain">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="about-item">
+                <i class="fafa"></i>
+                <h3>OUR MISSION</h3>
+                <br>
+                <p>At IntelliQuiz, our mission is to make learning engaging, effective, and accessible for everyone. We
+                  believe that education should be tailored to individual needs, and our platform is designed to empower
+                  users to master their subjects with confidence.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="about-item">
+                <i class="fafa"></i>
+                <h3>OUR VISION</h3>
+                <br>
+                <p>Our vision is to revolutionize the way people learn by providing a platform that adapts to each
+                  user's unique learning style, ensuring success in every exam and quiz.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="about-item">
+                <i class="fafa"></i>
+                <h3>CORE VALUES</h3>
+                <br>
+                <p>We are committed to innovation, accessibility, and excellence. These core values drive everything we
+                  do, from designing intuitive features to creating high-quality content."</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--FOOTER-->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h3>IntelliQuiz</h3>
+        <h4>&copy; 2025 IntelliQuiz. All rights reserved.</h4>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#quizzes">Explore</a></li>
+        <li><a href="#exam">Exam Preparation</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="admin.html">Admin-panel</a></li>
+      </ul>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
+
+
+
+<!--NEXT CODE OF EXAM PREP-->

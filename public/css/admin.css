@@ -1,0 +1,282 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/*LOGIN PAGE*/
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-container input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background: blue;
+    color: white;
+    border: none;
+}
+
+
+/*MAIN ADMIN PANEL*/
+.admin-container {
+    display: flex;
+}
+
+
+/*SIDEBAR*/
+.sidebar {
+    width: 250px;
+    background: #333;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table th {
+    background: #333;
+    color: white;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+/*QUIZZES DISPLAY MODAL*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+/* Bigger Modal Content */
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 1100px;
+    height: 80%;
+    max-height: 90%;
+    margin: 3% auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Close Button */
+.close {
+    float: right;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ff4d4d;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #e60000;
+}
+
+/* Scrollable Table */
+.table-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #007BFF;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+
+
+/*ADD QUIZ Button*/
+#addQuiz {
+    position: absolute;
+    right: 5%;
+    top: 4%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 2px solid #020127;
+    background-color: #020127;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}      
+#addQuiz:hover {
+    background-color: #0b0115;
+}
+/* General Modal Styles */
+.modalForm {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalForm-content {
+    background: #fff;
+    padding: 25px;
+    width: 50%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Form Styling */
+.modalForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-weight: 600;
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+/* Button Styling */
+form button {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+form button:hover {
+    background: #0056b3;
+}
+
+/* Disabled Button */
+form button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Question Count Styling */
+#questionCount {
+    font-size: 14px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 90%;
+    }
+}

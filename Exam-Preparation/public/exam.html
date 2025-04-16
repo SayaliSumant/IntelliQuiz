@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+<header>
+    <div class="top-section">
+        <img src="Logo.jpg" alt="logo" class="logo">
+        <div class="nav-buttons">
+            <button class="login">Log In</button>
+            <button class="signup">Sign Up</button>
+        </div>
+    </div>
+    <div class="intro">
+        <h1>Welcome to IntelliQuiz – Your Ultimate Quiz Companion!</h1>
+        <h2>Learn. Play. Master – IntelliQuiz Awaits!</h2>
+    </div>
+    <div class="banner">
+        <h1>A DOORWAY TO SUCCESS</h1>
+        <div class="banner-subtext">
+            <span>Perform</span>
+            <span>|</span>
+            <span>Analyse</span>
+            <span>|</span>
+            <span>Improve</span>
+        </div>
+    </div>
+</header>
+
+<div class="content">
+    <div class="section-title">Popular Courses</div>
+    <div class="courses-grid">
+        <div class="course-card" data-category="MAH PG CET">
+            <img src="https://notopedia-uploads.s3.us-east-2.amazonaws.com/bulletin_board/202403131124034436.jpg"
+             alt="CBSE Class VI">
+            <h3>MAH PG CET</h3>
+        </div>
+        <div class="course-card" data-category="NEET">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZeXP8JhumDX-VveZj_XFo-IouFNbAnQMzbw&s" alt="NEET UG">
+            <h3>NEET UG</h3>
+        </div>
+        <div class="course-card" data-category="MAH-CET-UG">
+            <img src="https://notopedia-uploads.s3.us-east-2.amazonaws.com/bulletin_board/202403131124034436.jpg" alt="SSC CGL">
+            <h3>MAH-CET UG</h3>
+        </div>
+        <div class="course-card" data-category="CTET">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKXZQ7zv2dxtKDq2unUm50lRFUauR36F8dmQ&s" alt="CTET Paper - I">
+            <h3>CTET Paper - I</h3>
+        </div>
+        <div class="course-card" data-category="JEE Advanced">
+            <img src="https://www.guidemecareer.com/backend/subcategory%20exam/JEE-Advanced.png" alt="CUET UG Hindi">
+            <h3>JEE Advanced</h3>
+        </div>
+        <div class="course-card" data-category="JEE Mains ">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO7YxpUC683iNtsAzlIdQ8mpxFeEXB0lPe4g&s" alt="JEE Main Advanced">
+            <h3>JEE Main</h3>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay and Popup -->
+<div class="overlay" id="overlay"></div>
+<div class="popup" id="popup">
+    <h2 id="popupTitle"></h2>
+    <p>Select your difficulty level for this course</p>
+    <ul class="level-btn" id="advanceBtn">
+        <li>Easy</li>
+        <li>Moderate</li>
+        <li>Difficult</li>
+    </ul>
+    <button id="closePopup">Close</button>
+</div>
+    <!--FOOTER-->
+  <footer>
+    <div class="footer-content">
+        <div class="footer-logo">
+            <h3>IntelliQuiz</h3>
+            <h4>&copy; 2025 IntelliQuiz. All rights reserved.</h4>
+        </div>
+        <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#quizzes">Explore</a></li>
+            <li><a href="/exam">Exam Preparation</a></li>
+            <li><a href="/">About Us</a></li>
+        </ul>
+    </div>
+</footer>
+<script src="exam.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="icon" href="./images/title-logo.png" type="image/png">
+    <link rel="stylesheet" href="./css/admin.css">
+
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h2>Admin Panel</h2>
+            <ul>
+                <!--li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="showSection('users')">User Management</a></li-->
+                <li><a href="#" onclick="showSection('quizzes')">Quiz Management</a></li>
+                <!--li><a href="#" onclick="showSection('progress')">Progress Monitoring</a></li-->
+                <li><a href="admin.html">Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <section id="dashboard">
+                <h2>Dashboard</h2>
+                <p>Overview of users, quizzes, and progress.</p>
+            </section>
+
+            <section id="users" style="display: none;">
+                <h2>User Management</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-list"></tbody>
+                </table>
+            </section>
+
+            <section id="quizzes" style="display: none;">
+                <h2>Quiz Management</h2>
+                <button id="addQuiz" onclick="newQuiz()">Add New Quiz</button>
+            
+                <!-- Add Quiz Modal -->
+                <div id="addQuizModal" class="modalForm" style="display: none;">
+                    <div class="modalForm-content">
+                        <span class="close" onclick="closeModal('addQuizModal')">&times;</span>
+                        <h2>Add New Quiz</h2>
+                        <form id="quizForm">
+                            <label for="category">Category:</label>
+                            <input type="text" id="category" name="category" required>
+            
+                            <label for="sub_category">Difficulty:</label>
+                            <select id="sub_category" name="sub_category">
+                                <option value="N/A">N/A</option>
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+            
+                            <button type="button" onclick="openModal('addQuestionsModal')">Next: Add Questions</button>
+                        </form>
+                    </div>
+                </div>
+            
+                <!-- Add Questions Modal -->
+                <div id="addQuestionsModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal('addQuestionsModal')">&times;</span>
+                        <h2>Add Questions</h2>
+                        <p id="questionCount">Questions Added: 0/25</p>
+            
+                        <form id="questionsForm">
+                            <label for="question">Question:</label>
+                            <textarea id="question" required></textarea>
+            
+                            <label>Options:</label>
+                            <input type="text" id="optionA" placeholder="Option A" required>
+                            <input type="text" id="optionB" placeholder="Option B" required>
+                            <input type="text" id="optionC" placeholder="Option C" required>
+                            <input type="text" id="optionD" placeholder="Option D" required>
+            
+                            <label for="correctAnswer">Correct Answer:</label>
+                            <select id="correctAnswer">
+                                <option value="A">Option A</option>
+                                <option value="B">Option B</option>
+                                <option value="C">Option C</option>
+                                <option value="D">Option D</option>
+                            </select>
+            
+                            <button type="button" onclick="addQuestion()">Add Question</button>
+                            <button type="submit" id="submitQuiz" disabled>Submit Quiz</button>
+                        </form>
+                    </div>
+                </div>
+            
+                <!--ALL STATIC QUIZZES DISPLAY-->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category</th>
+                            <th>Level</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quiz-list"></tbody>
+                </table>
+                <div id="pagination" style="margin-top: 20px; text-align: center;"></div>
+            
+                <!--QUIZ QUESTIONS DISPLAY-->
+                <div id="quizModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeQuizModal()">&times;</span>
+                        <h2>📖 Quiz Details</h2>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Question</th>
+                                        <th>Option A</th>
+                                        <th>Option B</th>
+                                        <th>Option C</th>
+                                        <th>Option D</th>
+                                        <th>Correct Answer</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="quizDisplay"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="progress" style="display: none;">
+                <h2>Progress Monitoring</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Category</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="progress-list"></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="./js/admin.js"></script>
+</body>
+</html>
